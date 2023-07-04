@@ -1,6 +1,7 @@
 import { HttpStatus } from '@nestjs/common';
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { FileUpload, GraphQLUpload } from 'graphql-upload';
+import GraphQLUpload from 'graphql-upload/GraphQLUpload.js';
+import { FileUpload } from './dto/FileUpload';
 
 @Resolver()
 export class UserResolver {
@@ -12,7 +13,7 @@ export class UserResolver {
   @Mutation(() => Int)
   uploadFiles(
     @Args('file', { type: () => GraphQLUpload })
-    file: Promise<FileUpload>,
+    file: FileUpload,
   ): HttpStatus {
     console.log({ file });
 
